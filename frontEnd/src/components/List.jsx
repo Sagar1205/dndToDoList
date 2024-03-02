@@ -11,7 +11,7 @@ import { useDrop } from "react-dnd";
 const List = ({ listName, listId, fetchLists }) => {
   const baseURL = import.meta.env.VITE_API_BASE_URL;
   const { currentUser, setCurrentUser } = useUser();
-  const { isDrop, setIsDrop} = useUser();
+  const { isDrop, setIsDrop } = useUser();
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -23,7 +23,7 @@ const List = ({ listName, listId, fetchLists }) => {
 
   useEffect(() => {
     setIsDrop(false);
-  },[isDrop === true])
+  }, [isDrop === true]);
 
   const fetchTasks = async (listId) => {
     try {
@@ -114,7 +114,9 @@ const List = ({ listName, listId, fetchLists }) => {
   const handleDeleteList = async () => {
     // console.log(id)
     try {
-      const response = await axios.delete(`${baseURL}/list/deleteList/${listId}`);
+      const response = await axios.delete(
+        `${baseURL}/list/deleteList/${listId}`
+      );
       console.log("delete successful:", response.data);
       fetchLists();
     } catch (error) {
@@ -146,7 +148,7 @@ const List = ({ listName, listId, fetchLists }) => {
         className="bg-gray-200 min-h-[30rem] w-[22rem] flex flex-col border-2 border-gray-400"
         style={{ backgroundColor: "#E7E7E7" }}
       >
-        <div className="group">
+        {/* <div className="group">
           <div
             className="bg-gray-400 text-center py-2 text-lg group-hover:hidden"
             style={{
@@ -162,6 +164,29 @@ const List = ({ listName, listId, fetchLists }) => {
           >
             <div></div>
             <div className="flex gap-4 px-2 py-[0.13rem]">
+              <button onClick={() => setIsAddModalOpen(true)}>
+                <PlusSmall />
+              </button>
+              <button onClick={() => setIsDeleteModalOpen(true)}>
+                <Delete />
+              </button>
+            </div>
+          </div>
+        </div> */}
+
+        <div
+          className="flex justify-between bg-gray-400 px-2"
+          style={{
+            backgroundColor: "#D9D9D9",
+            borderBottom: "1px solid grey",
+          }}
+        >
+          <div className="text-center py-2 text-lg">{listName}</div>
+          <div
+            className="bg-gray-400 text-center py-2 text-lg"
+            style={{ backgroundColor: "#D9D9D9" }}
+          >
+            <div className="flex gap-2 py-[0.13rem]">
               <button onClick={() => setIsAddModalOpen(true)}>
                 <PlusSmall />
               </button>
